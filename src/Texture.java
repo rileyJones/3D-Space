@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Texture{
+    public static Color BLANK_COLOR = new Color(255, 0, 255);
     private int height;
     private int width;
     private BufferedImage image;
@@ -22,6 +23,6 @@ public class Texture{
         if(!(x<0||y<0||x>=width||y>=height)){
             return new Color(image.getRGB(x,height-y-1));
         }
-        return new Color(100,200,255);
+        return BLANK_COLOR;
     }
 }

@@ -1,15 +1,17 @@
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-public class GraphicsPanel extends JPanel {
+public class GraphicsPanel extends JPanel implements Runnable, Updatable {
     private int pixelWidth;
     private int pixelHeight;
     private Color[][] graphicsArray;
     public GraphicsPanel(int width, int height){
+        super();
         pixelWidth = width;
         pixelHeight = height;
+        graphicsArray=null;
     }
     public void setScale(int width, int height){
         pixelWidth = width;
@@ -27,16 +29,30 @@ public class GraphicsPanel extends JPanel {
     @Override
     public void paint(Graphics g){
         Graphics2D g2d = (Graphics2D)g;
-        int width = this.getWidth();
-        int height = this.getHeight();
-        int scaleWidth=width/pixelWidth;
-        int scaleHeight=height/pixelHeight;
-        for(int x=0;x<pixelWidth;x++){
-            for(int y=0;y<pixelHeight;y++){
-                g2d.setColor(graphicsArray[x][y]);
-                g2d.fill(new Rectangle(x*scaleWidth,y*scaleHeight,scaleWidth,scaleHeight));
+        if(graphicsArray!=null) {
+            int width = this.getWidth();
+            int height = this.getHeight();
+            int scaleWidth = width / pixelWidth;
+            int scaleHeight = height / pixelHeight;
+            for (int x = 0; x < pixelWidth; x++) {
+                for (int y = 0; y < pixelHeight; y++) {
+                    g2d.setColor(graphicsArray[x][y]);
+                    g2d.fill(new Rectangle(x * scaleWidth, y * scaleHeight, scaleWidth, scaleHeight));
+                }
             }
         }
+    }
+
+    @Override
+    public void run() {
+        JFrame window = new JFrame();
+        window.add(this);
+        window.setVisible(true);
+    }
+
+    @Override
+    public void update() {
+        this.repaint();
     }
 }
 
