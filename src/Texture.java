@@ -19,7 +19,15 @@ public class Texture{
         }
 
     }
-    public Color getPixel(int x, int y){
+    public int getWidth(){
+        return width;
+    }
+    public int getHeight(){
+        return height;
+    }
+    public Color getPixel(double upSkew, double xA, double yA){
+        int x=(int) (xA*Math.cos(upSkew*2*Math.PI)+yA*Math.sin(upSkew*2*Math.PI));
+        int y= (int) (yA*Math.cos(upSkew*2*Math.PI)+xA*Math.sin(upSkew*2*Math.PI));
         if(!(x<0||y<0||x>=width||y>=height)){
             return new Color(image.getRGB(x,height-y-1));
         }

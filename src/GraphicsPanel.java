@@ -7,6 +7,7 @@ public class GraphicsPanel extends JPanel implements Runnable, Updatable {
     private int pixelWidth;
     private int pixelHeight;
     private Color[][] graphicsArray;
+    private JFrame window;
     public GraphicsPanel(int width, int height){
         super();
         pixelWidth = width;
@@ -16,6 +17,9 @@ public class GraphicsPanel extends JPanel implements Runnable, Updatable {
     public void setScale(int width, int height){
         pixelWidth = width;
         pixelHeight = height;
+    }
+    public void resize(int scale){
+        window.setSize(pixelWidth*scale,pixelHeight*scale);
     }
     public void setHeight(int height){
         pixelHeight = height;
@@ -45,14 +49,21 @@ public class GraphicsPanel extends JPanel implements Runnable, Updatable {
 
     @Override
     public void run() {
-        JFrame window = new JFrame();
+        window = new JFrame();
+        window.setSize(pixelWidth,pixelHeight);
+        //window.setResizable(false);
         window.add(this);
         window.setVisible(true);
     }
 
     @Override
     public void update() {
-        this.repaint();
+        SwingUtilities.invokeLater( new Runnable(){
+            @Override
+            public void run() {
+                repaint();
+            }
+        });
     }
 }
 

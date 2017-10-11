@@ -14,12 +14,24 @@ public class Point {
         return vector;
     }
     public double get(int index){
-        return vector[index-1];
+        return vector[index];
     }
     public Point makeRelative(Point x){
-        return new Point(x.get(1)-vector[0],x.get(2)-vector[1],x.get(3)-vector[2]);
+        return new Point(x.get(0)-vector[0],x.get(1)-vector[1],x.get(2)-vector[2]);
     }
     public double magnitude(){
         return Math.sqrt(Math.pow(vector[0],2)+Math.pow(vector[1],2)+Math.pow(vector[2],2));
+    }
+    public Point multiply(double constant){
+        return new Point(
+        vector[0]*constant,
+        vector[1]*constant,
+        vector[2]*constant);
+    }
+    public Point add(Point relativeVector){
+        return new Point(
+        vector[0]+relativeVector.get(0),
+        vector[1]+relativeVector.get(1),
+        vector[2]+relativeVector.get(2));
     }
 }
