@@ -12,6 +12,6 @@ public abstract class Drawable{
         image = new Texture(imageLocation);
         this.upSkew=upSkew;
     }
-    public abstract Color getPixel(Point POI);
-
+    public abstract Color getPixel(Point ray);
+    public abstract double magnitude(Point ray);    //Always call after getPixel
 }

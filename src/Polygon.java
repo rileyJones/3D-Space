@@ -66,7 +66,8 @@ public class Polygon extends Drawable{
     }
 
     @Override
-    public Color getPixel(Point POI) {
+    public Color getPixel(Point ray) {
+        Point POI = POI(ray);
         if(!isInside(POI))
             return Texture.BLANK_COLOR;
         double numerator=Polygon.dotProduct(textureOrigin.makeRelative(POI),upVector);
@@ -79,5 +80,9 @@ public class Polygon extends Drawable{
         if(xp.magnitude()*scale<0||yp.magnitude()*scale<0||xp.magnitude()*scale>=width||yp.magnitude()*scale>=height)
             return Texture.BLANK_COLOR;
         return image.getPixel(upSkew,(xp.magnitude()*scale),(yp.magnitude()*scale));
+    }
+    @Override
+    public double magnitude(Point ray){
+        return POI(ray).magnitude();
     }
 }
