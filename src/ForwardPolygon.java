@@ -13,4 +13,9 @@ public class ForwardPolygon extends Drawable{   //Not supported with moving came
             return Texture.BLANK_COLOR;
         return image.getPixel(upSkew,(POI.get(0)+(width/2-textureOrigin.get(0))*scale),(POI.get(1)+(height/2-textureOrigin.get(1))*scale));
     }
+
+    @Override
+    public double magnitude(Point ray) {
+        return 0;
+    }
 }
