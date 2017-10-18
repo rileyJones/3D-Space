@@ -14,13 +14,13 @@ public class AllPolygonGroup extends Drawable{
         polygons.add(polygon);
     }
     @Override
-    public Color getPixel(Point ray) {
+    public Color getPixel(Point ray,Point base) {
         double minMagnitude = Double.MAX_VALUE;
         Color pixel = Texture.BLANK_COLOR;
         for(Drawable polygon : polygons){
-            Color tempPix= polygon.getPixel(ray);
+            Color tempPix= polygon.getPixel(ray,base);
             if(!tempPix.equals(Texture.BLANK_COLOR)) {
-                if (polygon.magnitude(ray) < minMagnitude) {
+                if (polygon.magnitude(ray,base) < minMagnitude) {
                     minMagnitude=magnitude;
                     pixel=tempPix;
                 }
@@ -31,7 +31,7 @@ public class AllPolygonGroup extends Drawable{
     }
 
     @Override
-    public double magnitude(Point ray) {
+    public double magnitude(Point ray, Point base) {
         return magnitude;
     }
 }

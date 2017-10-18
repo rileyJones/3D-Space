@@ -20,12 +20,12 @@ public class SinglePolygonGroup extends Drawable{
         this.key=key;
     }
     @Override
-    public Color getPixel(Point ray) {
-        return polygonMap.get(key).getPixel(ray);
+    public Color getPixel(Point ray, Point base) {
+        return polygonMap.get(key).getPixel(ray,base);
     }
 
     @Override
-    public double magnitude(Point ray) {
-        return polygonMap.get(key).magnitude(ray);
+    public double magnitude(Point ray, Point base) {
+        return polygonMap.get(key).magnitude(ray,base);
     }
 }
