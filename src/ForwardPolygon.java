@@ -1,6 +1,6 @@
 import java.awt.*;
 import java.io.File;
-
+/*
 public class ForwardPolygon extends Drawable{   //Not supported with moving cameras currently
     public ForwardPolygon(double scale, Point textureOrigin, File imageLocation,double upSkew){
         super(scale,textureOrigin,imageLocation,upSkew);
@@ -19,3 +19,4 @@ public class ForwardPolygon extends Drawable{   //Not supported with moving came
         return 0;
     }
 }
+*/

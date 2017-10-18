@@ -27,13 +27,13 @@ public class SelectionPolygonGroup extends Drawable{
         return selectionStrings.remove(key);
     }
     @Override
-    public Color getPixel(Point ray) {
+    public Color getPixel(Point ray,Point base) {
         double minMagnitude = Double.MAX_VALUE;
         Color pixel = Texture.BLANK_COLOR;
         for(String polygon : selectionStrings){
-            Color tempPix= polygonMap.get(polygon).getPixel(ray);
+            Color tempPix= polygonMap.get(polygon).getPixel(ray,base);
             if(!tempPix.equals(Texture.BLANK_COLOR)) {
-                if (polygonMap.get(polygon).magnitude(ray) < minMagnitude) {
+                if (polygonMap.get(polygon).magnitude(ray,base) < minMagnitude) {
                     minMagnitude=magnitude;
                     pixel=tempPix;
                 }
@@ -44,7 +44,7 @@ public class SelectionPolygonGroup extends Drawable{
     }
 
     @Override
-    public double magnitude(Point ray) {
+    public double magnitude(Point ray,Point base) {
         return magnitude;
     }
 }

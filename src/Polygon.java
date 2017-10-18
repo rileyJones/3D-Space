@@ -37,9 +37,9 @@ public class Polygon extends Drawable{
     private void setNormal(){
         normal = Polygon.crossProduct(vector1,vector2);
     }
-    public Point POI(Point ray){
-        double d =Polygon.dotProduct(primary,normal) / Polygon.dotProduct(ray,normal);
-        return new Point(ray.get(0)*d,ray.get(1)*d,ray.get(2)*d);
+    public Point POI(Point ray,Point base){
+        double d =Polygon.dotProduct(primary.add(base.multiply(-1)),normal) / Polygon.dotProduct(ray,normal);
+        return new Point(ray.get(0)*d+base.get(0),ray.get(1)*d+base.get(1),ray.get(2)*d+base.get(2));
     }
     public boolean isInside(Point POI){
         ArrayList<Point> quickPoints = new ArrayList<Point>();
@@ -66,8 +66,8 @@ public class Polygon extends Drawable{
     }
 
     @Override
-    public Color getPixel(Point ray) {
-        Point POI = POI(ray);
+    public Color getPixel(Point ray, Point base) {
+        Point POI = POI(ray,base);
         if(!isInside(POI))
             return Texture.BLANK_COLOR;
         double numerator=Polygon.dotProduct(textureOrigin.makeRelative(POI),upVector);
@@ -82,7 +82,7 @@ public class Polygon extends Drawable{
         return image.getPixel(upSkew,(xp.magnitude()*scale),(yp.magnitude()*scale));
     }
     @Override
-    public double magnitude(Point ray){
-        return POI(ray).magnitude();
+    public double magnitude(Point ray, Point base){
+        return POI(ray,base).magnitude();
     }
 }
