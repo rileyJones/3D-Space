@@ -9,7 +9,7 @@ public class Environment implements Updatable{
     private boolean xax;
     public Environment(Point cameraBase, Point cameraDirection, Point cameraUp, int width, int height, double windowWidth, double windowHeight, double windowDepth,GraphicsPanel panel, Drawable polygon){
         this.polygon=polygon;
-        viewPort = new Camera(cameraBase, cameraDirection, cameraUp, width, height, windowWidth, windowHeight, windowDepth);
+        viewPort = new PointCamera(cameraBase, cameraDirection, cameraUp, width, height, windowWidth, windowHeight, windowDepth);
         this.panel=panel;
         xax=false;
     }
@@ -23,7 +23,7 @@ public class Environment implements Updatable{
         Color[][] display = new Color[viewPort.getWidth()][viewPort.getHeight()];
         for(int x = 0; x<viewPort.getWidth(); x++){
             for(int y = 0; y<viewPort.getHeight(); y++){
-                display[x][y]=polygon.getPixel(viewPort.getRay(x,y),viewPort.getBase());
+                display[x][y]=polygon.getPixel(viewPort.getRay(x,y),viewPort.getRayBase(x,y));
             }
         }
         return display;
