@@ -15,7 +15,7 @@ public class Startup {
         Point cameraBase = new Point(10,10,10);
         Point direction = new Point(-1,-1,1);
         Point up = new Point(-1,-1,-2);
-        Camera viewPort = new Camera(cameraBase,direction,up,width,height,20,20,10);
+        Camera viewPort = new PointCamera(cameraBase,direction,up,width,height,20,20,10);
         Environment environ = new Environment(viewPort,window,main);
         new Thread(window).start();
         new Thread(new Timer(200,environ,window)).start();   //Pass objects in the order to be updated

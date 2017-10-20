@@ -1,13 +1,14 @@
-public class Camera {
-    private Point base;
-    private Point direction;
-    private Point up;
-    private Point side;
-    private double distance;
-    private int width;
-    private int height;
-    private double windowWidth;
-    private double windowHeight;
+
+public abstract class Camera {
+    protected Point base;
+    protected Point direction;
+    protected Point up;
+    protected Point side;
+    protected double distance;
+    protected int width;
+    protected int height;
+    protected double windowWidth;
+    protected double windowHeight;
     public Camera(Point base, Point direction, Point up, int width, int height, double windowWidth, double windowHeight, double distance){
         this.base=base;
         this.direction=direction.multiply(1/direction.magnitude());
@@ -36,11 +37,12 @@ public class Camera {
         windowHeight=height;
         distance=depth;
     }
-    public Point getRay(int x, int y){
+    public abstract Point getRay(int x, int y);
+    public Point getRayBase(int x,int y){
         Point ray = side.multiply(x*windowWidth/(width-1)-windowWidth/2);
         ray = ray.add(up.multiply(y*windowHeight/(height-1)-windowHeight/2));
         ray= ray.add(direction.multiply(distance));
-        return ray;
+        return base.add(ray);
     }
     public Point getBase(){
         return base;
